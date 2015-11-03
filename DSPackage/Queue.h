@@ -4,25 +4,25 @@
 using namespace std;
 
 template <class T>
-class Node
+class QueueNode
 {
 public:
 	T value;
-	Node<T> *next;
+	QueueNode<T> *next;
 
-	Node ();
-	Node(T n);
+	QueueNode ();
+	QueueNode(T n);
 };
 
 template<class T>
-Node<T>::Node()
+QueueNode<T>::QueueNode()
 {
 	value=0;
 	next=NULL;
 }
 
 template<class T>
-Node<T>::Node(T n)
+QueueNode<T>::QueueNode(T n)
 {
 	value=n;
 	next=NULL;
@@ -34,8 +34,8 @@ class Queue
 {
 public:
 	int elements;
-	Node<T> *head;
-	Node<T> *tail;
+	QueueNode<T> *head;
+	QueueNode<T> *tail;
 
 	Queue();
 	void Clear();
@@ -63,7 +63,7 @@ bool Queue<T>::Empty()
 template <class T>
 void Queue<T>:: push(T value)
 {
-	Node<T>* temp=new Node<T>(value);
+	QueueNode<T>* temp=new QueueNode<T>(value);
 	tail->next=temp;
 	tail=temp;
 	elements++;
@@ -72,7 +72,7 @@ void Queue<T>:: push(T value)
 template<class T>
 T Queue<T>:: pop()
 {
-	Node<T> *del=head;
+	QueueNode<T> *del=head;
 	head=head->next;
 	T val= head->value;
 	delete del;

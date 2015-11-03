@@ -5,24 +5,24 @@
 using namespace std;
 
 template<class T>
-class Node{
+class DNode{
 public:
 	T value;
-	Node<T>* next;
-	Node<T>* prev;
-	Node();
-	Node(T n);
+	DNode<T>* next;
+	DNode<T>* prev;
+	DNode();
+	DNode(T n);
 };
 
 template<class T>
-Node<T>::Node()
+DNode<T>::DNode()
 {
 	value=0;
 	next=prev=NULL;
 }
 
 template<class T>
-Node<T>::Node(T n)
+DNode<T>::DNode(T n)
 {
 	value=n;
 	next=prev=NULL:
@@ -32,8 +32,8 @@ template<class T>
 class DLinkedList
 {
 public:
-	Node<T>*head;
-	Node<T>*tail;
+	DNode<T>*head;
+	DNode<T>*tail;
 	int elements;
 
 	DLinkedList();
@@ -61,7 +61,7 @@ bool DLinkedList<T>::Empty()
 template <class T>
 void DLinkedList<T>::AppendFront( T value)
 {
-	Node <T> *temp = new Node <T> (value);
+	DNode <T> *temp = new DNode <T> (value);
 		if (Empty())
 			head=tail=temp;
 		else
@@ -75,7 +75,7 @@ void DLinkedList<T>::AppendFront( T value)
 template <class T>
 void DLinkedList<T>::AppendBack( T value)
 {
-	Node <T> *temp = new Node <T> (value);
+	DNode <T> *temp = new DNode <T> (value);
 		if (Empty())
 			head=tail=temp;
 		else
@@ -93,7 +93,7 @@ template <class T>
             cout<<"The Doubly Linked List is damn empty. Fill it !!"<<endl;
         else
         {
-		Node<T> *tmp=head;
+		DNode<T> *tmp=head;
 
 		while(tmp!=NULL)
 		{
@@ -112,7 +112,7 @@ template <class T>
             cout<<"The Doubly Linked List is damn empty. Fill it !!"<<endl;
         else
         {
-		Node<T> *tmp=tail;
+		DNode<T> *tmp=tail;
 
 		while(tmp!=NULL)
 		{
@@ -130,7 +130,7 @@ template <class T>
 		if (elements==0)
 		{return;}
 
-		Node<T> *tmp;
+		DNode<T> *tmp;
 			while(!Empty())
 		{
 			tmp=head;

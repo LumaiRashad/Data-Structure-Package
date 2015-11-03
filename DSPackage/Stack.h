@@ -3,41 +3,49 @@
 #include <string>
 using namespace std;
 
-template<class T>
-class Node{
+template <class T>
+class StackNode
+{
 public:
+	StackNode();
+	StackNode(T val);
+	StackNode<T> *next;
 	T value;
-	Node<T>* next;
-
-	Node();
-	Node(T n);
 };
 
-template<class T>
-Node<T>::Node()
-{value=0;
-next=NULL;}
 
-template<class T>
-Node<T>::Node(T n)
-{value=n;
-next=NULL;}
-
-
-template<class T>
-class Stack{
-public:
-	Node<T>* head;
+template <class T>
+class Stack
+{
+	StackNode<T> *head;
 	int elements;
-
+public:
 	Stack();
 	int Size();
 	bool Empty();
 	void Clear();
 	void push(T val);
 	T pop();
+	void Display();
 	T top();
 };
+
+
+template<class T>
+StackNode<T>::StackNode()
+{
+	next=NULL;
+	value=0;
+}
+
+template<class T>
+StackNode<T>::StackNode(T val)
+{
+	next=NULL;
+	value=val;
+}
+
+
 
 template <class T>
 Stack<T>::Stack()
@@ -52,33 +60,36 @@ bool Stack<T>::Empty()
 	return (elements==0);
 }
 
-template <class T>
-int Stack <T>::Size()
-{
-	return elements;
-}
 
 template <class T>
 void Stack<T>::push(T val)
 {
-	Node<T>*temp=new Node <T> (val);
+	StackNode<T> *temp= new StackNode <T> (val);
+
 		if(Empty())
 			head=temp;
+
 		else
 		{
-			head->next=temp;
+			temp->next=head;
 			head= temp;
 		}
-		elements ++;
+		elements++;
 }
 
 template<class T>
 T Stack<T>::pop()
 {
-	Node <T> *del=head;
+	T val;
+	if (Empty())
+		cout<<"You can't pop"<<endl;
+	else
+	{
+	StackNode <T> *del=head;
 	head=head->next;
-	T val=del->value;
+    val=del->value;
 	delete del;
+	}
 	elements--;
 	return val;
 }
@@ -91,8 +102,24 @@ void Stack<T>:: Clear()
 }
 
 template <class T>
+void Stack<T>::Display()
+{
+	if(Empty())
+		cout<<endl<<"The Stack is empty!!"<<endl;
+	else
+    {
+	StackNode<T> *temp = head;
+	while(temp!=NULL)
+	{
+		cout<<temp->value<<"  ";
+		temp=temp->next;
+	}
+    }
+	cout<<endl<<"The size is: "<<elements<<endl;
+}
+
+template <class T>
 T Stack<T>::top()
 {
 	return head->value;
 }
-
